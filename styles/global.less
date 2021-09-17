@@ -1,0 +1,87 @@
+// 字体
+.bw-font(@name, @fileName, @weight: 'normal') { // 字体引入函数
+  @font-face {
+    font-family: @name;
+    src: url('@{base-font-path}/@{fileName}.eot'),
+         url('@{base-font-path}/@{fileName}.otf'),
+         url('@{base-font-path}/@{fileName}.ttf'),
+         url('@{base-font-path}/@{fileName}.woff');
+    font-weight: @weight;
+  }
+}
+.bw-font('Montserrat-Medium', 'Montserrat-Medium');
+@base-font-path: '/fonts';
+@font-size-sm: .24rem; // 小字号
+@font-size-bs: .28rem; // 主字号
+@font-size-lg: .32rem; // 大字号
+
+// 页面基本颜色
+@base-color: #F2F2F2;
+
+@red: red;
+
+// 页面基本背景色
+@base-backgroud-color: @base-color;
+
+html {
+  margin: 0px;
+  padding: 0px;
+  min-height: 100vh;
+  overflow: hidden auto;
+  background: @base-color;
+  font-size: calc(100vw / 7.5); // 设计稿375px 1rem = 50px
+}
+
+// 默认字体和字体大小
+body {
+  font-size: @font-size-bs;
+  font-family: Montserrat-Medium;
+  min-height: 100vh;
+}
+
+html, body {
+  margin: 0rem;
+  padding: 0rem;
+}
+
+// 所有的盒子边框都是border-box
+* {
+  box-sizing: border-box;
+}
+
+// p标签消除默认样式
+p {
+  margin-bottom: 0rem;
+}
+a {
+  text-decoration: none;
+}
+
+// 清除浮动
+.clearfix(){
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// 单行文本截取
+.ellipsis() { 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// 多行文本截取，此样式IE下不显示'...'，因此单行文本截取用ellipsis
+.mulEllipsis(@lineNum: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: @lineNum;
+  /*!autoprefixer:off*/
+  -webkit-box-orient: vertical;
+  /*autoprefixer:on*/
+  overflow: hidden;
+}
